@@ -1,0 +1,22 @@
+{
+  "name": "castrel-landing",
+  "scripts": {
+    "dev": "nuxt dev --extends docus",
+    "build": "nuxt build --extends docus"
+  },
+  "dependencies": {
+    "@nuxt/a11y": "1.0.0-alpha.1",
+    "@nuxt/eslint": "1.12.1",
+    "@nuxt/fonts": "0.12.1",
+    "@nuxt/hints": "1.0.0-alpha.5",
+    "@nuxt/icon": "2.2.0",
+    "@nuxt/scripts": "0.13.2",
+    "@nuxt/test-utils": "3.23.0",
+    "@unhead/vue": "^2.1.2",
+    "better-sqlite3": "^12.5.0",
+    "docus": "latest",
+    "eslint": "^9.39.2",
+    "nuxt": "^4.2.2"
+  },
+  "packageManager": "pnpm@10.27.0+sha512.72d699da16b1179c14ba9e64dc71c9a40988cbdc65c264cb0e489db7de917f20dcf4d64d8723625f2969ba52d4b7e2a1170682d9ac2a5dcaeaab732b7e16f04a"
+}
