@@ -1,0 +1,83 @@
+export default defineNuxtConfig({
+    // 应用配置
+    app: {
+        head: {
+            link: [
+                { rel: 'icon', type: 'image/png', href: '/images/castrel_logo_v3.png' },
+            ],
+        },
+    },
+
+    // 全局 CSS
+    css: ['~/assets/css/fonts.css'],
+
+    // 字体配置
+    fonts: {
+        defaults: {
+            weights: [400, 500, 600, 700],
+            styles: ['normal', 'italic'],
+            subsets: ['latin', 'latin-ext'],
+        },
+        families: [
+            // UI 字体
+            {
+                name: 'SF Pro Text',
+                provider: 'local',
+                global: true,
+            },
+            // 文章内容字体
+            {
+                name: 'iA Writer Quattro',
+                provider: 'local',
+                global: true,
+            },
+            // 文章回退字体（中文）
+            {
+                name: 'Noto Sans SC',
+                provider: 'google',
+                global: true,
+            },
+            // 代码字体
+            {
+                name: 'Fira Code',
+                provider: 'local',
+                global: true,
+            },
+        ],
+        experimental: {
+            processCSSVariables: true,
+        },
+    },
+
+    // Tailwind CSS 配置
+    tailwindcss: {
+        config: {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // UI 字体：用于导航、按钮、标签等界面元素
+                        ui: ['SF Pro Text', 'PingFang SC', 'system-ui', 'sans-serif'],
+                        // 文章字体：用于文档正文、博客内容
+                        prose: ['iA Writer Quattro', 'Noto Sans SC', 'sans-serif'],
+                        // 代码字体：用于代码块、行内代码
+                        mono: ['Fira Code', 'Menlo', 'Monaco', 'monospace'],
+                    },
+                },
+            },
+            safelist: [
+                'grid-cols-3',
+                'grid-cols-4',
+                'grid-cols-6',
+                'sm:grid-cols-3',
+                'sm:grid-cols-4',
+                'sm:grid-cols-6',
+                'md:grid-cols-3',
+                'md:grid-cols-4',
+                'md:grid-cols-6',
+                'lg:grid-cols-3',
+                'lg:grid-cols-4',
+                'lg:grid-cols-6',
+            ],
+        },
+    },
+})

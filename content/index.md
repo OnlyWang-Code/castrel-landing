@@ -1,123 +1,168 @@
 ---
 seo:
-  title: Write beautiful docs with Markdown
+  title: Castrel - the AI SRE Agent
   description: Ship fast, flexible, and SEO-optimized documentation with beautiful
     design out of the box. Docus brings together the best of the Nuxt ecosystem.
     Powered by Nuxt UI.
 ---
 
 ::u-page-hero
+---
+orientation: horizontal
+---
+
 #title
-Write beautiful docs with Markdown
+Hands off, Always on
 
 #description
-Ship fast, flexible, and SEO-optimized documentation with beautiful design out of the box.
-
-Docus brings the best of the Nuxt ecosystem into one CLI.
+Castrel is a SRE Agent. It can triage alerts, investigate incidents, plan and perform operation tasks for you.
 
 #links
-  :::u-button
-  ---
-  color: neutral
-  size: xl
-  to: /getting-started/installation
-  trailing-icon: i-lucide-arrow-right
-  ---
-  Get started
+  :::get-started-button
   :::
 
   :::u-button
   ---
   color: neutral
-  icon: simple-icons-github
+  icon: i-lucide-book
   size: xl
-  to: https://github.com/nuxt-content/docus
-  variant: outline
+  to: /docs/getting-started/introduction
+  variant: ghost
   ---
-  Star on GitHub
+  Documentation
   :::
+
+#default
+  :::hero-illustration
+  :::
+::
+
+::product-features
+---
+tabs:
+  - label: Alert Triage
+    icon: i-lucide-bell
+    title: Alert Triage
+    description: Automatically classify alerts as False Positive, Potential Risk, or Incident. Correlate metrics, logs, and changes to cut through noise and focus on what matters.
+    rightImage: /images/alert-triage.png
+    imagePosition: top left
+    imageScale: 1.1
+    docsUrl: /docs/getting-started/introduction
+  - label: Incident Investigation
+    icon: i-lucide-bug
+    title: Incident Investigation
+    description: Collaborate with AI to pinpoint root causes. Provide clues, review hypotheses, and get transparent evidence chains — human context meets AI's global data analysis.
+    demoUrl: http://10.0.12.149:5000/chat/session-chat-chat_graph-20260112180806-06ef0f0f
+    docsUrl: /docs/getting-started/introduction
+  - label: Operation Tasks
+    icon: i-lucide-terminal
+    title: Operation Tasks
+    description: Castrel can plan and perform deployments or infrastructure changes for you.
+    demoUrl: http://10.0.12.149:5000/shared/session-chat-chat_graph-20260106194839-3b8b21aa
+    docsUrl: /docs/getting-started/introduction
+  - label: Ask your System
+    icon: i-lucide-circle-question-mark
+    title: Ask your System
+    description: Use @ to mention your services or IT Resources and easily ask about its status, architecture and alerts.
+    fullWidthImage: /images/ask1.png
+    imagePosition: top center
+    demoUrl: http://10.0.12.149:5000/shared/ad6d09ff-5a96-49d9-854d-74a30d14b2fe
+    docsUrl: /docs/getting-started/introduction
+
+---
+
+#tab-0-left
+:::alert-triage-flow
+:::
+
+#tab-1-left
+:::incident-investigation-flow
+:::
+
+#tab-1-right
+:::incident-images
+:::
+
+#tab-2-left
+:::operation-task-flow
+:::
+
+#tab-2-right
+:::task-image
+:::
 ::
 
 ::u-page-section
 #title
-Shipped with many features
+Works with Your Existing Stack
 
-#features
-  :::u-page-feature
+#description
+Native integrations with popular observability, cloud and technology tools.
+
+#default
+  :::integration-grid
   ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://nuxt.com
+  integrations:
+    - name: Prometheus
+      icon: i-simple-icons-prometheus
+    - name: Elasticsearch
+      icon: i-simple-icons-elasticsearch
+    - name: Grafana Loki
+      icon: /images/logo-grafana-loki.png
+    - name: Grafana Tempo
+      icon: /images/tempo-icon.png
+    - name: Slack
+      icon: i-simple-icons-slack
+    - name: GitHub
+      icon: i-simple-icons-github
   ---
-  #title
-  Built with [Nuxt 4]{.text-primary}
-  
-  #description
-  Optimized by the most famous Vue framework. Docus gives you everything you need to build fast, performant, and SEO-friendly websites.
   :::
+::
 
-  :::u-page-feature
-  ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://ui.nuxt.com/
-  ---
-  #title
-  Powered by [Nuxt UI]{.text-primary}
-  
-  #description
-  Beautiful out of the box, minimal by design but highly customizable. Docus leverages Nuxt UI to give you the best docs writing experience with zero boilerplate, just focus on your content.
-  :::
 
-  :::u-page-feature
-  ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://content.nuxt.com
-  ---
-  #title
-  Enhanced Markdown syntax by [Nuxt Content]{.text-primary}
-  
-  #description
-  The only thing you need to take care about is writing your content. Write your pages in Markdown and extend with MDC syntax to embed Nuxt UI or custom Vue components. Structure, routing, and rendering are handled for you.
-  :::
+::u-page-section
+#title
+Enterprise-Grade Security
 
-  :::u-page-feature
-  ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://nuxt.com/docs/guide/directory-structure/app-config
-  ---
-  #title
-  Customize with [Nuxt App Config]{.text-primary}
-  
-  #description
-  Update colors, social links, header logos and component styles globally using the `app.config.ts`, no direct code modifications required.
-  :::
+#description
+Your data security is our top priority. Castrel is built with multiple layers of protection to ensure your data remains private and secure.
 
-  :::u-page-feature
+#default
+  :::feature-bento
   ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://content.nuxt.com/studio
+  gridCols: 4
+  features:
+    - icon: i-lucide-shield-check
+      title: Read-Only Access
+      description: Castrel only requires read access to your data. No write permissions, no modifications, no risks.
+      cols: 2
+      rows: 2
+    - icon: i-lucide-lock
+      title: Zero Training Guarantee
+      description: Your data is never used to train or fine-tune any models. Guaranteed by contracts with all LLM providers.
+      cols: 2
+      rows: 1
+    - icon: i-lucide-shield
+      title: Compliance Ready
+      description: GDPR, HIPAA, and ISO 27001 compliant. Built for regulated industries.
+      cols: 1
+      rows: 1
+    - icon: i-lucide-eye-off
+      title: Private by Default
+      description: No employee has access to your data unless explicitly authorized by you for support purposes.
+      cols: 1
+      rows: 2
+    - icon: i-lucide-server
+      title: On-Premise Deployment
+      description: Deploy Castrel in your own infrastructure. Use your own AI services. Full control over your data.
+      badge: Enterprise
+      cols: 2
+      rows: 1
+    - icon: i-lucide-key
+      title: End-to-End Encryption
+      description: AES-256 encryption at rest and TLS 1.3 in transit. Your data is protected at every layer.
+      cols: 1
+      rows: 1
   ---
-  #title
-  Edit in production with [Nuxt Studio]{.text-primary}
-  
-  #description
-  Edit your content in production with zero Markdown knowledge required. Let your non technical colleagues collaborate on the documentation and integrate Vue components without code skills.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://ui.nuxt.com/components/content-search
-  ---
-  #title
-  Built-in navigation and [full-text search]{.text-primary}
-  
-  #description
-  Only focus on ordering your content, Docus handles the search modal and auto-generates the side navigation for you.
   :::
 ::

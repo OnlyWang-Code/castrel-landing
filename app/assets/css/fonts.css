@@ -1,0 +1,81 @@
+/**
+ * 全局字体配置
+ * 
+ * - UI 字体 (font-ui): SF Pro Text + PingFang SC，用于界面元素
+ * - 文章字体 (font-prose): iA Writer Quattro + Noto Sans SC，用于正文内容
+ * - 代码字体 (font-mono): Fira Code，用于代码块（支持编程连字）
+ */
+
+/* ============================================
+   基础字体应用
+   ============================================ */
+
+/* 全局默认使用 UI 字体 */
+body {
+    font-family: 'SF Pro Text', 'PingFang SC', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   文章/文档内容字体
+   ============================================ */
+
+/* Prose 容器使用文章字体 */
+.prose,
+.prose-content,
+[data-content-type="markdown"],
+article {
+    font-family: 'iA Writer Quattro', 'Noto Sans SC', 'Noto Sans', system-ui, sans-serif;
+}
+
+/* 文章标题仍使用 UI 字体保持一致性 */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6,
+article h1,
+article h2,
+article h3,
+article h4,
+article h5,
+article h6 {
+    font-family: 'SF Pro Text', 'PingFang SC', system-ui, sans-serif;
+}
+
+/* ============================================
+   代码字体
+   ============================================ */
+
+/* 代码块和行内代码 */
+code,
+kbd,
+pre,
+samp,
+.shiki,
+[class*="language-"] {
+    font-family: 'Fira Code', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+    font-feature-settings: 'calt' 1, 'liga' 1; /* 启用编程连字 */
+}
+
+/* ============================================
+   Tailwind 工具类
+   ============================================ */
+
+/* 显式使用 UI 字体 */
+.font-ui {
+    font-family: 'SF Pro Text', 'PingFang SC', system-ui, sans-serif;
+}
+
+/* 显式使用文章字体 */
+.font-prose {
+    font-family: 'iA Writer Quattro', 'Noto Sans SC', system-ui, sans-serif;
+}
+
+/* 显式使用代码字体 */
+.font-mono {
+    font-family: 'Fira Code', 'Menlo', 'Monaco', monospace;
+}
