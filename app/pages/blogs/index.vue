@@ -12,10 +12,12 @@
         const allDocs = await queryCollection('docs').all();
         const blogPosts = allDocs?.filter(doc => doc.path?.startsWith('/blogs/')) || [];
 
+        // Sort by order field descending (higher order = newer = first)
+        // Note: frontmatter fields may be in meta object or directly on doc
         return blogPosts.sort((a: any, b: any) => {
-            const dateA = a.meta?.date ? new Date(a.meta.date).getTime() : 0;
-            const dateB = b.meta?.date ? new Date(b.meta.date).getTime() : 0;
-            return dateB - dateA;
+            const orderA = a.order || a.meta?.order || 0;
+            const orderB = b.order || b.meta?.order || 0;
+            return orderB - orderA;
         });
     })
 </script>
