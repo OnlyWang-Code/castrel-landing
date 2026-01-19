@@ -87,15 +87,17 @@
             <div v-if="hasButtons"
                 class="buttons-section flex flex-col gap-2 min-w-[140px]">
                 <UButton v-if="tab.demoUrl" :to="tab.demoUrl" target="_blank"
-                    variant="outline" color="neutral" block>
-                    Chat Demo
+                    variant="outline" color="neutral" block
+                    icon="i-lucide-external-link">
+                    Demo
                 </UButton>
                 <UButton v-if="tab.videoUrl" :to="tab.videoUrl" target="_blank"
-                    variant="outline" color="neutral" block>
-                    Video Demo
+                    variant="outline" color="neutral" block
+                    icon="i-lucide-external-link">
+                    Video
                 </UButton>
                 <UButton v-if="tab.docsUrl" :to="tab.docsUrl" variant="outline"
-                    color="neutral" block>
+                    color="neutral" block icon="i-lucide-file-text">
                     Documents
                 </UButton>
             </div>

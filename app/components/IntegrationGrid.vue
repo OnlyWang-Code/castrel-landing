@@ -11,7 +11,7 @@
 </script>
 
 <template>
-    <div class="w-full grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    <div class="w-full grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
         <component :is="item.to ? 'a' : 'div'" v-for="item in integrations"
             :key="item.name" :href="item.to" :target="item.to ? '_blank' : undefined"
             class="flex flex-col items-center justify-center p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-primary-500 dark:hover:border-primary-400 transition-colors no-underline"

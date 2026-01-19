@@ -93,6 +93,10 @@ tabs:
 #tab-2-right
 :::task-image
 :::
+
+#tab-3-left
+:::deployment-verification-flow
+:::
 ::
 
 ::u-page-section
@@ -118,6 +122,8 @@ Native integrations with popular observability, cloud and technology tools.
       icon: i-simple-icons-slack
     - name: GitHub
       icon: i-simple-icons-github
+    - name: Vercel
+      icon: i-simple-icons-vercel
   ---
   :::
 ::
