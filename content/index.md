@@ -47,19 +47,23 @@ tabs:
     rightImage: /images/alert-triage.png
     imagePosition: top left
     imageScale: 1.1
-    docsUrl: /docs/getting-started/introduction
+    docsUrl: /docs/features/alert-triage
   - label: Incident Investigation
     icon: i-lucide-bug
     title: Incident Investigation
     description: Collaborate with AI to pinpoint root causes. Provide clues, review hypotheses, and get transparent evidence chains — human context meets AI's global data analysis.
     demoUrl: http://10.0.12.149:5000/chat/session-chat-chat_graph-20260112180806-06ef0f0f
-    docsUrl: /docs/getting-started/introduction
+    docsUrl: /docs/features/incident-investigation
   - label: Operation Tasks
     icon: i-lucide-terminal
     title: Operation Tasks
     description: Castrel can plan and perform deployments or infrastructure changes for you.
     demoUrl: http://10.0.12.149:5000/shared/session-chat-chat_graph-20260106194839-3b8b21aa
-    docsUrl: /docs/getting-started/introduction
+  - label: Deployment Verification
+    icon: i-lucide-shield-check
+    title: Deployment Verification
+    description: Automatically verify deployments by correlating metrics, logs, and traces before and after changes. Detect anomalies early and ensure safe rollouts.
+    docsUrl: /docs/features/deployment-verification
   - label: Ask your System
     icon: i-lucide-circle-question-mark
     title: Ask your System
@@ -67,7 +71,6 @@ tabs:
     fullWidthImage: /images/ask1.png
     imagePosition: top center
     demoUrl: http://10.0.12.149:5000/shared/ad6d09ff-5a96-49d9-854d-74a30d14b2fe
-    docsUrl: /docs/getting-started/introduction
 
 ---
 

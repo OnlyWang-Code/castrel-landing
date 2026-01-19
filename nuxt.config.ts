@@ -66,7 +66,7 @@ export default defineNuxtConfig({
                 extend: {
                     fontFamily: {
                         // UI 字体：用于导航、按钮、标签等界面元素
-                        ui: ['SF Pro Text', 'PingFang SC', 'system-ui', 'sans-serif'],
+                        ui: ['Microsoft YaHei', '-apple-system', 'sans-serif'],
                         // 文章字体：用于文档正文、博客内容
                         prose: ['iA Writer Quattro', 'Noto Sans SC', 'sans-serif'],
                         // 代码字体：用于代码块、行内代码
