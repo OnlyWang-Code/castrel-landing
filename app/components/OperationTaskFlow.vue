@@ -5,19 +5,20 @@
     const rendered = ref('')
 
     const diagram = `
-flowchart LR
+flowchart
+    direction LR
     subgraph P ["📋 Planning"]
-        A["👤 Request"] --> B["🤖 Generate"]
-        B <-->|"✏️"| C["👤 Review"]
-        C --> D["📄 Runbook"]
+        direction LR
+        B["🤖 Plan Change"]
+        B <--> C["👤 Review & Feedback"]
     end
 
     subgraph E ["⚡ Execution"]
-        D --> F["🤖 Execute"]
-        F -->|"🔒"| G["👤 Confirm"]
-        G --> H["✅ Done"]
-        F -->|"Auto"| H
+        direction LR
+        F["🤖 Execute"] --> G["👤 Audit"]
     end
+
+    P --> E
 `
 
     onMounted(async () => {

@@ -6,10 +6,33 @@
 
     const diagram = `
 flowchart TD
-    A["⚠️ Alert"] --> B["🤖 Castrel Analysis"]
-    B -->|"👤 Hypothesis"| D["User Review"]
-    D -->|"💬 Feedback"| B
-    D -->|"✅ Confirm"| E["🎯 Report"]
+    subgraph I ["Incident Investigation"]
+        direction TB
+
+        subgraph B ["Agent"]
+            direction LR
+            D["Hypothesis"]
+            E["Verification"]
+            F["Causal Analysis"]
+
+            D -->E --> F --> D
+        end
+
+        subgraph X["Knowledge"]
+            direction LR
+
+            X1["User Feedback"]
+            X2["Similar Incident"]
+            X3["Related Mannuals / Runbooks"]
+        end
+
+        B <--> X
+
+    end
+
+
+    A["⚠️ Incident"] --> I
+    I -->|"Confirm or Fallback"| C["🎯 Investigation Report"]
 `
 
     onMounted(async () => {

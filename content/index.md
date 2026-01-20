@@ -131,7 +131,7 @@ Native integrations with popular observability, cloud and technology tools.
 
 ::u-page-section
 #title
-Enterprise-Grade Security
+Enterprise Level Security
 
 #description
 Your data security is our top priority. Castrel is built with multiple layers of protection to ensure your data remains private and secure.
@@ -148,12 +148,12 @@ Your data security is our top priority. Castrel is built with multiple layers of
       rows: 2
     - icon: i-lucide-lock
       title: Zero Training Guarantee
-      description: Your data is never used to train or fine-tune any models. Guaranteed by contracts with all LLM providers.
+      description: Your data is never used to train or fine-tune any models. Guaranteed by the privacy policy of castrel and all the providers we use.
       cols: 2
       rows: 1
     - icon: i-lucide-shield
       title: Compliance Ready
-      description: GDPR, HIPAA, and ISO 27001 compliant. Built for regulated industries.
+      description: GDPR compliant.
       cols: 1
       rows: 1
     - icon: i-lucide-eye-off
@@ -163,7 +163,7 @@ Your data security is our top priority. Castrel is built with multiple layers of
       rows: 2
     - icon: i-lucide-server
       title: On-Premise Deployment
-      description: Deploy Castrel in your own infrastructure. Use your own AI services. Full control over your data.
+      description: Deploy Castrel in your own infrastructure. Use your own AI Infra. Full control over your data.
       badge: Enterprise
       cols: 2
       rows: 1
