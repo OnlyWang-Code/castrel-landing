@@ -12,7 +12,7 @@ orientation: horizontal
 ---
 
 #title
-Hands off, Always on
+Hands off,<br/>Always on
 
 #description
 Castrel is an SRE Agent. It can triage alerts, investigate incidents, verify deployments, plan and perform operation tasks and answer Ops questions for you.
@@ -35,6 +35,13 @@ Castrel is an SRE Agent. It can triage alerts, investigate incidents, verify dep
 #default
   :::hero-illustration
   :::
+
+#footer
+::div{.text-sm .text-muted}
+Castrel is currently in :u-badge{variant="outline" color="neutral" class="align-text-bottom"}[beta].
+::
+
+
 ::
 
 ::product-features
@@ -53,6 +60,8 @@ tabs:
     icon: i-lucide-bug
     title: Incident Investigation
     description: Collaborate with AI to pinpoint root causes. Provide clues, review hypotheses, and get transparent evidence chains — human context meets AI's global data analysis.
+    fullWidthImage: /images/incident2.png
+    imagePosition: top center
     demoUrl: http://10.0.12.149:5000/chat/session-chat-chat_graph-20260112180806-06ef0f0f
     docsUrl: /docs/features/incident-investigation
   - label: Operation Tasks
@@ -79,13 +88,6 @@ tabs:
 :::alert-triage-flow
 :::
 
-#tab-1-left
-:::incident-investigation-flow
-:::
-
-#tab-1-right
-:::incident-images
-:::
 
 #tab-2-left
 :::operation-task-flow
