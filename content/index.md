@@ -139,6 +139,9 @@ Native integrations with popular observability, cloud and technology tools.
     - name: Vercel
       icon: i-simple-icons-vercel
       to: /docs/integrations/vercel
+    - name: GitHub
+      icon: i-simple-icons-github
+      to: /docs/integrations/github
   ---
   :::
 ::
