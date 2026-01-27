@@ -15,7 +15,7 @@ orientation: horizontal
 Hands off,<br/>Always on
 
 #description
-Castrel is an SRE Agent. It can triage alerts, investigate incidents, verify deployments, plan and perform operation tasks and answer Ops questions for you.
+Castrel is a helpful and secure SRE Agent for incident investigation, alert triage, auto operation and more.
 
 #links
   :::get-started-button
@@ -38,7 +38,7 @@ Castrel is an SRE Agent. It can triage alerts, investigate incidents, verify dep
 
 #footer
 ::div{.text-sm .text-muted}
-Castrel is currently in :u-badge{variant="outline" color="neutral" class="align-text-bottom"}[beta].
+Castrel is currently in :u-badge{variant="outline" color="neutral" class="align-middle -mt-0.5"}[beta].
 ::
 
 
@@ -60,27 +60,36 @@ tabs:
     icon: i-lucide-bug
     title: Incident Investigation
     description: Collaborate with AI to pinpoint root causes. Provide clues, review hypotheses, and get transparent evidence chains — human context meets AI's global data analysis.
-    fullWidthImage: /images/incident2.png
+    fullWidthImage: /images/incident-investigation.png
     imagePosition: top center
-    demoUrl: http://10.0.12.149:5000/chat/session-chat-chat_graph-20260112180806-06ef0f0f
+    demoUrl: https://app-sit.castrel.ai/shared/61f819ae-a351-438f-8bb3-e35753fd8fc0
     docsUrl: /docs/features/incident-investigation
   - label: Operation Tasks
     icon: i-lucide-terminal
     title: Operation Tasks
     description: Castrel can plan and perform deployments or infrastructure changes for you.
-    demoUrl: http://10.0.12.149:5000/shared/session-chat-chat_graph-20260106194839-3b8b21aa
+    rightImage: /images/task-execution.png
+    imagePosition: top left
+    imageScale: 1.1
+    demoUrl: https://app-sit.castrel.ai/shared/b36ac90f-7e22-4a83-af76-f398e73708bb
+    docsUrl: /docs/features/castrel-proxy
   - label: Deployment Verification
     icon: i-lucide-shield-check
     title: Deployment Verification
     description: Automatically verify deployments by correlating metrics, logs, and traces before and after changes. Detect anomalies early and ensure safe rollouts.
+    rightImage: /images/deployment-verification.png
+    imagePosition: top left
+    imageScale: 1.1
+    demoUrl: https://app-sit.castrel.ai/shared/eed90769-97a5-4c4f-ba72-85cc3ae10859
     docsUrl: /docs/features/deployment-verification
   - label: System Q&A
     icon: i-lucide-circle-question-mark
     title: System Q&A
     description: Query your system using natural language. Mention services / IT resources with @ to ask about status, architecture, or alerts.
-    fullWidthImage: /images/ask1.png
+    fullWidthImage: /images/system-qa.png
     imagePosition: top center
-    demoUrl: http://10.0.12.149:5000/shared/ad6d09ff-5a96-49d9-854d-74a30d14b2fe
+    demoUrl: https://app-sit.castrel.ai/shared/7dbdddb4-05aa-4625-9895-8e376b335964
+
 
 ---
 
@@ -88,13 +97,8 @@ tabs:
 :::alert-triage-flow
 :::
 
-
 #tab-2-left
 :::operation-task-flow
-:::
-
-#tab-2-right
-:::task-image
 :::
 
 #tab-3-left
@@ -169,7 +173,7 @@ Your data security is our top priority. Castrel is built with multiple layers of
       rows: 1
     - icon: i-lucide-shield
       title: Compliance Ready
-      description: GDPR compliant.
+      description: We follow industry-standard security practices.
       cols: 1
       rows: 1
     - icon: i-lucide-eye-off
@@ -185,7 +189,7 @@ Your data security is our top priority. Castrel is built with multiple layers of
       rows: 1
     - icon: i-lucide-key
       title: End-to-End Encryption
-      description: AES-256 encryption at rest and TLS 1.3 in transit. Your data is protected at every layer.
+      description: AES-256 encryption and TLS in transit. Your data is protected at every layer.
       cols: 1
       rows: 1
   ---

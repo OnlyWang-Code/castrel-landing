@@ -36,7 +36,7 @@ export default defineAppConfig({
                 {
                     icon: 'i-simple-icons-youtube',
                     label: 'YouTube',
-                    to: 'about:blank',
+                    to: 'https://www.youtube.com/@castrelai',
                     target: '_blank',
                 },
             ],
