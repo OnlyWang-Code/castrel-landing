@@ -1,5 +1,6 @@
 # Docus Default Starter
 
+
 > A beautiful, minimal starter for creating documentation with Docus
 
 This is the default Docus starter template that provides everything you need to build beautiful documentation sites with Markdown and Vue components.
