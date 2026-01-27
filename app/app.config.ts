@@ -1,5 +1,7 @@
 export default defineAppConfig({
     appUrl: process.env.NUXT_PUBLIC_APP_URL || 'https://app.castrel.ai',
+    // 禁用 GitHub 集成（隐藏 header/footer 的 GitHub 图标和文档底部的 Edit this page 链接）
+    github: false,
     header: {
         logo: {
             light: '/images/castrel_logo_v3.png',

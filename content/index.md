@@ -15,29 +15,20 @@ Hands off,<br/>Always on
 #description
 Castrel is a helpful and secure SRE Agent for incident investigation, alert triage, auto operation and more.
 
-#links
-  :::get-started-button
-  :::
-
-  :::u-button
-  ---
-  color: neutral
-  icon: i-lucide-book
-  size: xl
-  to: /docs/getting-started/introduction
-  variant: ghost
-  ---
-  Documentation
-  :::
+#footer
+:::div{.flex .flex-col .gap-6}
+::::div{.flex .flex-wrap .gap-x-6 .gap-y-3}
+:u-button{color="neutral" size="xl" to="https://app.castrel.ai" target="_blank" trailing-icon="i-lucide-arrow-right"}[Try Free]
+:u-button{color="neutral" size="xl" to="/docs/getting-started/introduction" icon="i-lucide-book" variant="ghost"}[Documentation]
+::::
+::::div{.text-sm .text-muted}
+Castrel is currently in :u-badge{variant="outline" color="neutral" class="align-middle -mt-0.5"}[beta].
+::::
+:::
 
 #default
-  :::hero-illustration
-  :::
-
-#footer
-::div{.text-sm .text-muted}
-Castrel is currently in :u-badge{variant="outline" color="neutral" class="align-middle -mt-0.5"}[beta].
-::
+:::hero-illustration
+:::
 
 
 ::
