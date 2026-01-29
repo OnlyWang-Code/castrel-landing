@@ -7,6 +7,8 @@ seo:
 ::u-page-hero
 ---
 orientation: horizontal
+ui:
+  container: "flex flex-col lg:grid py-12 sm:py-16 lg:py-20 gap-16 sm:gap-y-24"
 ---
 
 #title
@@ -31,6 +33,12 @@ Castrel is currently in :u-badge{variant="outline" color="neutral" class="align-
 :::
 
 
+::
+
+::u-container{class="py-12 lg:py-16"}
+<video controls preload="metadata" poster="/images/incident-investigation.jpg" style="aspect-ratio: 16/9; width: 100%; border-radius: 12px;">
+  <source src="/videos/CastrelIntro.mp4" type="video/mp4" />
+</video>
 ::
 
 ::product-features
