@@ -1,12 +1,13 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Offline install script for Castrel Proxy
-# Usage: cd <directory containing this script and packages/> && bash install.sh
+# Usage: cd <directory containing this script and packages/> && sh install.sh
 #
-# User install (no sudo): CASTREL_INSTALL_DIR=~/.local/bin bash install.sh
+# User install (no sudo): CASTREL_INSTALL_DIR=~/.local/bin sh install.sh
 # Ensure ~/.local/bin is in your PATH.
 #
 # Supports: Ubuntu 20+, Debian 10+, CentOS 7+, macOS
+# Compatible with: bash 3.x+, dash, ash, busybox sh, zsh
 #
 
 set -e
@@ -14,32 +15,41 @@ set -e
 # Hardcoded version (tag includes "v" prefix)
 VERSION="v1.0.6"
 
-# REPO="castrel-ai/castrel-proxy"
-# BASE_URL="https://github.com/${REPO}"
 INSTALL_DIR="${CASTREL_INSTALL_DIR:-/usr/local/bin}"
-# Expand ~ to $HOME for user install (e.g. CASTREL_INSTALL_DIR=~/.local/bin)
-INSTALL_DIR="${INSTALL_DIR/#\~/$HOME}"
+# Expand ~ to $HOME for user install (e.g. CASTREL_INSTALL_DIR="~/.local/bin")
+case "$INSTALL_DIR" in
+  "~"/*)  INSTALL_DIR="$HOME/${INSTALL_DIR#\~/}" ;;
+  "~")    INSTALL_DIR="$HOME" ;;
+esac
 BINARY_NAME="castrel-proxy"
 
 # Script directory (where the packages are located)
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+# ── Platform-to-package lookup (POSIX compatible) ───────────────────────────
 
-declare -A PACKAGE_PATHS=(
-  ["macos-arm64"]="packages/castrel-proxy-macos-arm64"
-  ["macos-x86_64"]="packages/castrel-proxy-macos-x86_64"
-  ["linux-x86_64"]="packages/castrel-proxy-linux-x86_64"
-  ["linux-arm64"]="packages/castrel-proxy-linux-arm64"
-)
+get_package_path() {
+  case "$1" in
+    macos-arm64)  echo "packages/castrel-proxy-macos-arm64" ;;
+    macos-x86_64) echo "packages/castrel-proxy-macos-x86_64" ;;
+    linux-x86_64) echo "packages/castrel-proxy-linux-x86_64" ;;
+    linux-arm64)  echo "packages/castrel-proxy-linux-arm64" ;;
+    *)            echo "" ;;
+  esac
+}
 
-declare -A CHECKSUM_PATHS=(
-  ["macos-arm64"]="packages/castrel-proxy-macos-arm64.sha256"
-  ["macos-x86_64"]="packages/castrel-proxy-macos-x86_64.sha256"
-  ["linux-x86_64"]="packages/castrel-proxy-linux-x86_64.sha256"
-  ["linux-arm64"]="packages/castrel-proxy-linux-arm64.sha256"
-)
+get_checksum_path() {
+  case "$1" in
+    macos-arm64)  echo "packages/castrel-proxy-macos-arm64.sha256" ;;
+    macos-x86_64) echo "packages/castrel-proxy-macos-x86_64.sha256" ;;
+    linux-x86_64) echo "packages/castrel-proxy-linux-x86_64.sha256" ;;
+    linux-arm64)  echo "packages/castrel-proxy-linux-arm64.sha256" ;;
+    *)            echo "" ;;
+  esac
+}
 
-# Colors for output (strip if not a terminal)
+# ── Colored output helpers (use printf for portability) ──────────────────────
+
 if [ -t 1 ]; then
   RED='\033[0;31m'
   GREEN='\033[0;32m'
@@ -50,114 +60,84 @@ else
 fi
 
 die() {
-  echo -e "${RED}Error: $1${NC}" >&2
+  printf "${RED}Error: %s${NC}\n" "$1" >&2
   exit 1
 }
 
 log() {
-  echo -e "${GREEN}$1${NC}"
+  printf "${GREEN}%s${NC}\n" "$1"
 }
 
 warn() {
-  echo -e "${YELLOW}$1${NC}"
+  printf "${YELLOW}%s${NC}\n" "$1"
 }
 
+# ── SHA256 checksum (try multiple tools) ─────────────────────────────────────
 
-# Compute SHA256 (try sha256sum, then shasum, then openssl)
 compute_sha256() {
-  local file="$1"
+  _file="$1"
   if command -v sha256sum >/dev/null 2>&1; then
-    sha256sum "$file" | awk '{print $1}'
+    sha256sum "$_file" | awk '{print $1}'
   elif command -v shasum >/dev/null 2>&1; then
-    shasum -a 256 "$file" | awk '{print $1}'
+    shasum -a 256 "$_file" | awk '{print $1}'
   elif command -v openssl >/dev/null 2>&1; then
-    openssl dgst -sha256 "$file" | awk '{print $NF}'
+    openssl dgst -sha256 "$_file" | awk '{print $NF}'
   else
     die "No SHA256 tool found (sha256sum, shasum, or openssl required)."
   fi
 }
 
-# Detect OS and architecture
+# ── Detect OS and architecture ───────────────────────────────────────────────
+
 detect_platform() {
-  local os
-  local arch
+  _os=""
+  _arch=""
 
   case "$(uname -s)" in
-    Darwin)
-      os="macos"
-      ;;
-    Linux)
-      os="linux"
-      ;;
-    *)
-      die "Unsupported OS: $(uname -s)"
-      ;;
+    Darwin) _os="macos" ;;
+    Linux)  _os="linux" ;;
+    *)      die "Unsupported OS: $(uname -s)" ;;
   esac
 
   case "$(uname -m)" in
-    x86_64|amd64)
-      arch="x86_64"
-      ;;
-    aarch64|arm64)
-      arch="arm64"
-      ;;
-    *)
-      die "Unsupported architecture: $(uname -m)"
-      ;;
+    x86_64|amd64)   _arch="x86_64" ;;
+    aarch64|arm64)   _arch="arm64" ;;
+    *)               die "Unsupported architecture: $(uname -m)" ;;
   esac
 
-  echo "${os}-${arch}"
+  echo "${_os}-${_arch}"
 }
 
-# # Get latest release info from GitHub API
-# get_latest_release() {
-#   local api_url="https://api.github.com/repos/${REPO}/releases/latest"
-#   local dl_tool="$1"
-#
-#   if [ "$dl_tool" = "curl" ]; then
-#     curl -fsSL "$api_url" 2>/dev/null || die "Failed to fetch release info. Check network and https://github.com/${REPO}/releases"
-#   else
-#     wget -q -O - "$api_url" 2>/dev/null || die "Failed to fetch release info. Check network and https://github.com/${REPO}/releases"
-#   fi
-# }
-
-# # Parse JSON (minimal, no jq required) - get tag_name
-# parse_tag() {
-#   grep -o '"tag_name"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"\(v[^"]*\)"$/\1/'
-# }
+# ── Main ─────────────────────────────────────────────────────────────────────
 
 main() {
   log "Castrel Proxy - Offline installer"
   echo ""
 
-  # Hardcoded version (no longer fetching from GitHub)
-  local tag="${VERSION}"
+  # Hardcoded version
+  tag="${VERSION}"
   log "Version: $tag"
 
-  local platform
   platform=$(detect_platform)
   log "Detected platform: $platform"
 
-  # Resolve local package path from hardcoded mapping
-  local pkg_relative="${PACKAGE_PATHS[$platform]}"
-  local sha_relative="${CHECKSUM_PATHS[$platform]}"
+  # Resolve local package path
+  pkg_relative=$(get_package_path "$platform")
+  sha_relative=$(get_checksum_path "$platform")
 
   [ -z "$pkg_relative" ] && die "No package configured for platform: $platform"
 
-  local pkg_path="${SCRIPT_DIR}/${pkg_relative}"
-  local sha_path="${SCRIPT_DIR}/${sha_relative}"
+  pkg_path="${SCRIPT_DIR}/${pkg_relative}"
+  sha_path="${SCRIPT_DIR}/${sha_relative}"
 
   [ -f "$pkg_path" ] || die "Package file not found: $pkg_path"
   [ -f "$sha_path" ] || die "Checksum file not found: $sha_path"
 
-  local pkg_name
   pkg_name=$(basename "$pkg_path")
   log "Installing ${pkg_name} from local packages..."
 
   # Verify checksum
-  local expected_hash
   expected_hash=$(awk '{print $1}' "$sha_path")
-  local actual_hash
   actual_hash=$(compute_sha256 "$pkg_path")
 
   if [ "$expected_hash" != "$actual_hash" ]; then
@@ -166,7 +146,7 @@ main() {
   log "SHA256 checksum verified."
 
   # Install to target directory (create if needed for user install)
-  local target_path="${INSTALL_DIR}/${BINARY_NAME}"
+  target_path="${INSTALL_DIR}/${BINARY_NAME}"
   if [ ! -d "$INSTALL_DIR" ]; then
     if mkdir -p "$INSTALL_DIR" 2>/dev/null; then
       :
@@ -177,7 +157,7 @@ main() {
     fi
   fi
 
-  if [ -w "$INSTALL_DIR" ] 2>/dev/null; then
+  if [ -w "$INSTALL_DIR" ]; then
     cp "$pkg_path" "$target_path"
   else
     warn "Need sudo to install to ${INSTALL_DIR}"
