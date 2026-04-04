@@ -57,10 +57,17 @@
 ### 上传流程
 1. （可选）先统一生成 webp：
    - `pnpm images:compress-webp`
-2. 上传 Blob 并刷新 manifest：
+2. 全量上传 Blob 并刷新 manifest（会重建 `blob-assets-manifest.json`）：
    - `pnpm blob:upload-assets`
 3. 仅预览将上传的文件：
    - `pnpm blob:upload-assets:dry-run`
+
+### 增量上传（重要）
+- 当只新增少量图片时，不要用“临时脚本重写 manifest”只写入新文件映射，否则旧图片会从 manifest 消失，线上 `/images/**` 会批量 404。
+- 增量上传后必须确保 `blob-assets-manifest.json` 保留历史映射并追加新映射（与目标分支做并集）。
+- 变更前建议先检查：
+  - `rg '"/images/' blob-assets-manifest.json`
+  - 确认主页/logo/博客历史图片映射仍在，再提交。
 
 上传脚本：`scripts/upload-assets-to-blob.mjs`
 - 会读取 `blob-assets/` 下支持目录并上传。
@@ -130,3 +137,37 @@
 - 再拉同 deployment 的日志，确认：
   - `/images/**`、`/fonts/**` 返回 200
   - `/_vercel/image` 的旧 404 若为 `cache: HIT`，多半是历史负缓存，换查询参数验证新 key。
+
+## 7) 发版文档格式要求（Changelog）
+
+### 7.1 适用范围
+- `content/{zh,en}/changelog/**`
+- 新版本从 `v1.4.0` 起采用固定格式（历史版本保持原样，除非用户明确要求重写）。
+
+### 7.2 术语约定
+- 中文文案中：Automation 统一写作「自动化」。
+- 产品文案中：Bridge / BridgeNode 统一写作「Castrel Proxy」。
+  - `Bridge*` 仅在代码语境使用，不作为对外发布名词。
+
+### 7.3 标题与章节规则
+- `title` 不写版本号；版本号只放在 frontmatter 的 `version` 字段。
+- 章节标题禁止使用“第一部分/第二部分/第三部分”这类命名。
+
+### 7.4 固定章节结构（四章）
+1. `新功能：自动化`
+2. `Proxy 新增代理模式`
+3. `新增 x 项集成（并标注增强项）`
+4. `完整发版清单`
+
+### 7.5 写作要求
+- 核心功能章节（自动化、Castrel Proxy）使用 1~2 段简短文字说明，不要只列点。
+- 核心功能章节必须带对应文档链接。
+- 集成章节必须逐项标明“新增”或“增强”，不能混写“新增/增强”。
+- 完整发版清单必须分 `feat` 和 `bugfix` 两小节。
+- `description` 用 2~3 句话概述核心功能章节，不写成长摘要。
+
+### 7.6 i18n 要求
+- 中英文 changelog 需同步更新；结构一致、语义对齐。
+
+### 7.7 详细规范文档
+- 见：`docs/release-note-format.md`
